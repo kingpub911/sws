@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqeren.ssw.repository.BookMapper">
+	<resultMap id="BaseResultMap" type="com.cqeren.ssw.domain.Book">
+		<result column="id" property="id" />
+		<result column="douban_id" property="doubanId" />
+		<result column="title" property="title" />
+		<result column="url" property="url" />
+		<result column="description" property="description" />
+		<result column="owner_id" property="ownerId" />
+		<result column="onboard_date" property="onboardDate" />
+		<result column="status" property="status" />
+		<result column="borrower_id" property="borrowerId" />
+		<result column="borrow_date" property="borrowDate" />
+	</resultMap>
+
+	<parameterMap id="Book" type="com.cqeren.ssw.domain.Book"/>
+
+	<sql id="Base_Column_List">
+		douban_id, title, url
+	</sql>
+
+	<select id="findByTitle" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		select
+		<include refid="Base_Column_List" />
+		from book
+		where title = #{title}
+	</select>
+
+</mapper>
