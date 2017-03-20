@@ -14,17 +14,33 @@
 		<result column="borrow_date" property="borrowDate" />
 	</resultMap>
 
-	<parameterMap id="Book" type="com.cqeren.ssw.domain.Book"/>
+	<parameterMap id="Book" type="com.cqeren.ssw.domain.Book" />
 
 	<sql id="Base_Column_List">
 		douban_id, title, url
 	</sql>
 
-	<select id="findByTitle" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	<select id="findByTitle" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from book
 		where title = #{title}
 	</select>
+	<select id="selectBooks" resultMap="BaseResultMap">
+		select * from book where 1=1
+	</select>
+	<insert id="insertBook" useGeneratedKeys="true" keyProperty="id" parameterType="Book">
+		insert into book
+		(id,douban_id,title,url,description,owner_id,onboard_date,status,borrower_id,borrow_date)
+		values
+		(#{id},#{doubanId},#{title},#{url},#{description},#{owner_id},#{onboard_date},#{status},#{borrower_id},#{borrow_date})
+	</insert>
 
+	<select id="findBookById" resultMap="BaseResultMap" parameterType="long">
+		select
+		id,douban_id,title,url,description,owner_id,onboard_date,status,borrower_id,borrow_date
+		from book
+		where id = #{id}
+	</select>
 </mapper>

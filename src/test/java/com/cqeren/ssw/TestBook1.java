@@ -3,6 +3,8 @@
  */
 package com.cqeren.ssw;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -31,5 +33,12 @@ public class TestBook1 {
 		Book book = bookService.findByTilte("DSL实战");
 		log.info("book 对象="+ book.getDoubanId() + "=====" +book.getTitle() + "-----" + book.getOnboardDate());
 
+	}
+//	@Test
+	public void findBooks(){
+		List<Book> list = bookService.selectBooks();
+		for (Book book : list) {
+			log.info(book.getTitle());
+		}
 	}
 }
